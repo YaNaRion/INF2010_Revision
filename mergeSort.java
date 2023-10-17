@@ -1,31 +1,32 @@
 import java.util.Random;
 
-public class main {
+public class mergeSort {
 
 	public static void main(String[] args){
 
-        int nombreElement = 10;
-
+        int nombreElement = 20000000;
         Integer [] tableauASort = new Integer[nombreElement];
-
         Random rand = new Random();
 
         for(int i =0; i < tableauASort.length; i++){
-            tableauASort[i] = rand.nextInt(30);
+            tableauASort[i] = rand.nextInt(100000000);
         }
-
+        /*
         for(int i =0; i < tableauASort.length; i++){
             System.out.println(tableauASort[i]);
         }
+         */
 
+        long starDuration = System.nanoTime();
         mergeSort(tableauASort);
-
+        long endDuration = System.nanoTime();
+        System.out.printf("le sort à pris: " + (endDuration-starDuration) + " nanoSeconde" + '\n');
+        /*
         System.out.println("tableauSort");
-
         for(int i =0; i < tableauASort.length; i++){
             System.out.println(tableauASort[i]);
         }
-
+        */
 	}
 
     public static <AnyType extends Comparable<? super AnyType>> 
@@ -60,6 +61,7 @@ public class main {
                 tmpArray[ tmpPos++ ] = a[ leftPos++ ]; //le ++ ce fait après l'insersion
             else 
                 tmpArray[ tmpPos++ ] = a[ rightPos++ ]; 
+
         while( leftPos <= leftEnd ) // Copier le reste de la partie gauche soit le while de droite soit le while de gauche va copier le reste l'autre sera dejà à la bonne pos
             tmpArray[ tmpPos++ ] = a[ leftPos++ ]; 
     

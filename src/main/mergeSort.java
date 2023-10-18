@@ -1,32 +1,33 @@
+package src.main;
 import java.util.Random;
 
 public class mergeSort {
 
 	public static void main(String[] args){
 
-        int nombreElement = 20000000;
+        int nombreElement = 40;
         Integer [] tableauASort = new Integer[nombreElement];
         Random rand = new Random();
 
         for(int i =0; i < tableauASort.length; i++){
-            tableauASort[i] = rand.nextInt(100000000);
+            tableauASort[i] = rand.nextInt(1000);
         }
-        /*
+        
         for(int i =0; i < tableauASort.length; i++){
             System.out.println(tableauASort[i]);
         }
-         */
+        
 
         long starDuration = System.nanoTime();
         mergeSort(tableauASort);
         long endDuration = System.nanoTime();
         System.out.printf("le sort à pris: " + (endDuration-starDuration) + " nanoSeconde" + '\n');
-        /*
+        
         System.out.println("tableauSort");
         for(int i =0; i < tableauASort.length; i++){
             System.out.println(tableauASort[i]);
         }
-        */
+        
 	}
 
     public static <AnyType extends Comparable<? super AnyType>> 

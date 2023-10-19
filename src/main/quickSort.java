@@ -53,18 +53,19 @@ public class quickSort {
     void quicksort( AnyType [ ] a, int left, int right ) {
             // Si suffisamment grand
         if( left + 10 <= right ) { //10 etait CUTFF, car si le array est trop petit il est plus efficace de le trier avec un algorythme simple
-            AnyType pivot = median3( a, left, right );
+            AnyType pivot = median3( a, left, right ); //trouvon le pivot
             // Début du partitionnement du tableau a en fonction du pivot
             int i = left, j = right - 1; // i à l’extrémité gauche et j à l’extrémité droite (-1)
             for( ; ; ) {
-                while( a[ ++i ].compareTo( pivot ) < 0 ) { }
-                while( a[ --j ].compareTo( pivot ) > 0 ) { }
+                while( a[ ++i ].compareTo( pivot ) < 0 ) { } //trouvons le premier élément dans la partie de gauche qui est plus grand que le pivot
+                while( a[ --j ].compareTo( pivot ) > 0 ) { } //trouvons le premier élément dans la partie de droite qui est plus petit que  le pivot
                 if( i < j )
-                    swapReferences( a, i, j ); // permuter a[i] et a[j]
+                    swapReferences( a, i, j ); // permuter a[i] et a[j] on échange le premier élément de gauche qui est plus grand que le pivot et le premier élément de 
+                                               // droite qui est plus petit que le pivot
                 else
-                    break; // sortir de la boucle car la partition du tableau est terminée
+                    break; // sortir de la boucle car la partition du tableau est terminée, car à guache du pivot il y a que des < pivots et à droite > pivot
                 }
-            swapReferences( a, i, right - 1 ); // Permute a[i] et pivot
+            swapReferences( a, i, right - 1 ); // Permute a[i] et pivot (en rapport avec le dernier swapReferance)
             quicksort( a, left, i - 1 ); // Trier les éléments <= pivot
             quicksort( a, i + 1, right ); // Trier les éléments >= pivot
             } // Sinon tri par insertion
@@ -94,10 +95,12 @@ public class quickSort {
     */
     private static <AnyType extends Comparable<? super AnyType>>
     AnyType median3( AnyType [ ] a, int left, int right ) {
-        int center = ( left + right ) / 2;
-        if( a[ center ].compareTo( a[ left ] ) < 0 ) swapReferences( a, left, center );
+        int center = ( left + right ) / 2; //on prend l'indice médiant
+        if( a[ center ].compareTo( a[ left ] ) < 0 ) swapReferences( a, left, center ); // si l'élément médiant est plus petit que l'élément 
         if( a[ right ].compareTo( a[ left ] ) < 0 ) swapReferences( a, left, right );
         if( a[ right ].compareTo( a[ center ] ) < 0 ) swapReferences( a, center, right );
+        //Les trois if font en sorte que l'élément à l'indice left est sur d'être le plus petit, que celui le plus à droite est le plus grand et que le centre soit entre les deux
+        
         // Place le pivot à la position right - 1
         swapReferences( a, center, right - 1 );
         return a[ right - 1 ];
@@ -110,5 +113,4 @@ public class quickSort {
         a[x] = temp;
 
     }
-
 }
